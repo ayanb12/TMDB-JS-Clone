@@ -25,7 +25,6 @@ function clearSpinner() {
 
 let value = "";
 function takeInput(e) {
-  console.log(e.target.value);
   value = e.target.value;
 }
 
