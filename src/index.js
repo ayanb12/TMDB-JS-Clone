@@ -4,7 +4,7 @@ import {
   renderCards,
   showSpinner,
   clearSpinner,
-  submitvalue,
+  submitValue,
   takeInput,
   clearFields,
 } from "./view/view";
@@ -24,7 +24,7 @@ elements.input.addEventListener("change", takeInput);
 let searchresult = "";
 let searchApiData = null;
 elements.form.addEventListener("submit", async (e) => {
-  searchresult = submitvalue(e);
+  searchresult = submitValue(e);
   clearFields();
   searchApiData = await fetchSearchResult(searchresult.trim());
   console.log(searchApiData);
