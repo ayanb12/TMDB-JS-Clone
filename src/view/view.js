@@ -28,7 +28,7 @@ function takeInput(e) {
   value = e.target.value;
 }
 
-function submitValue(e) {
+function submitvalue(e) {
   e.preventDefault();
   return value;
 }
@@ -43,6 +43,6 @@ export {
   showSpinner,
   clearSpinner,
   takeInput,
-  submitValue,
+  submitvalue,
   clearFields,
 };
