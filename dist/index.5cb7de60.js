@@ -496,7 +496,14 @@ async function fetchSearchResult(query) {
     return data;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./config/config":"2qEF7"}],"JacNc":[function(require,module,exports) {
+},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2qEF7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
+);
+const API_KEY = "9d6004ceb5e357b927f6b91f9ddb142a";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"JacNc":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -528,14 +535,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"2qEF7":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
-);
-const API_KEY = "38e228f3438faeda18e3f67f7b45310b";
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eOwXc":[function(require,module,exports) {
+},{}],"eOwXc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderCards", ()=>renderCards
@@ -567,7 +567,6 @@ function clearSpinner() {
 }
 let value = "";
 function takeInput(e) {
-    console.log(e.target.value);
     value = e.target.value;
 }
 function submitValue(e) {
@@ -586,8 +585,8 @@ parcelHelpers.export(exports, "elements", ()=>elements
 );
 const elements = {
     cardContainer: document.querySelector(".popular-cards"),
-    eachCard: document.querySelector(".movie-card"),
-    spinner: document.querySelector(".spinner"),
+    eachCard: document.querySelector(".popular-cards .movie-card"),
+    spinner: document.querySelector(".popular-cards .spinner"),
     form: document.querySelector(".background form"),
     input: document.querySelector(".background form input")
 };
