@@ -110,19 +110,23 @@ nav .icons-ul li i {
 
 /* popular section */
 .popular,
-.latest {
+.latest ,
+.freetowatch
+{
   padding: 30px;
 }
 
 .popular .popular-heading,
-.latest .latest-heading {
+.latest .latest-heading,
+.freetowatch .freetowatch-heading  {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
 }
 
 .popular .popular-heading h4,
-.latest .latest-heading h4 {
+.latest .latest-heading h4 ,
+.freetowatch .freetowatch-heading h4{
   font-size: 24px;
   margin-right: 30px;
 }
@@ -153,13 +157,15 @@ nav .icons-ul li i {
   color: white;
 }
 .popular-cards,
-.latest-cards {
+.latest-cards ,
+.freetowatch-cards{
   display: flex;
   align-items: center;
   position: relative;
 }
 .popular-cards .spinner,
-.latest-cards .spinner {
+.latest-cards .spinner,
+.freetowatch-cards .spinner {
   position: absolute;
   background: url("../images/loader2.gif") no-repeat center center/cover;
   height: 90px;
@@ -169,7 +175,8 @@ nav .icons-ul li i {
 }
 
 .popular-cards .hide,
-.latest-cards .hide {
+.latest-cards .hide ,
+.freetowatch-cards .hide{
   display: none;
 }
 .popular .movie-card {
@@ -284,6 +291,59 @@ nav .icons-ul li i {
 }
 /* latest ends */
 /* trending section */
+.freetowatch-cards .movie-image{
+  background: url("../images/freetowatchlogo.jpg") no-repeat center
+  center/cover;
+
+height: 300px;
+border-radius: 10px;
+}
+.freetowatch-cards{
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.freetowatch-cards .movie-card {
+  margin-right: 1.5rem;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  display: inline-block;
+  
+}
+.freetowatch-cards .movie-card h6 {
+  font-size: 17px;
+  margin-bottom: 7px;
+  color: grey;
+}
+.freetowatch .freetowatch-heading .categories {
+  border: 1px solid black;
+  display: flex;
+  width: 200px;
+  height: 30px;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.freetowatch .freetowatch-heading  .categories span {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  padding-top: 3px;
+  color: black;
+  font-weight: 600;
+}
+
+.freetowatch .freetowatch-heading  .categories span.active  {
+  background-color: #00003d;
+  border-radius: 50px;
+  color: white;
+}
+
 .trending {
   background-image: url(../images/backgroundTrending.svg);
 
