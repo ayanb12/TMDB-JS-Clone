@@ -1,12 +1,14 @@
 import { API_KEY } from "./config/config";
+import {link} from "./view/view"
 
 // For storing and fetching any data
-async function fetchPopularMovies() {
+async function fetchPopularMovies(url=link) {
   let result = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+    `${url}`
+    
   );
   let data = await result.json();
-
+    console.log(data)
   return data;
 }
 

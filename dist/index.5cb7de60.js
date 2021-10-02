@@ -474,6 +474,13 @@ _base.elements.form.addEventListener("submit", async (e)=>{
     let { results  } = await _models.fetchSearchResult(searchresult.trim());
     _view.renderCards(results);
 });
+_base.elements.categories.addEventListener("click", async (e)=>{
+    let link = _view.swapPage(e);
+    let { results  } = await _models.fetchPopularMovies(link.trim());
+    console.log(results);
+    _view.renderCards(results);
+    console.log(link.trim());
+});
 
 },{"./models":"ihxjA","./view/view":"eOwXc","./view/base":"lrDl3"}],"ihxjA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -483,10 +490,12 @@ parcelHelpers.export(exports, "fetchPopularMovies", ()=>fetchPopularMovies
 parcelHelpers.export(exports, "fetchSearchResult", ()=>fetchSearchResult
 );
 var _config = require("./config/config");
+var _view = require("./view/view");
 // For storing and fetching any data
-async function fetchPopularMovies() {
-    let result = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`);
+async function fetchPopularMovies(url = _view.link) {
+    let result = await fetch(`${url}`);
     let data = await result.json();
+    console.log(data);
     return data;
 }
 async function fetchSearchResult(query) {
@@ -495,7 +504,7 @@ async function fetchSearchResult(query) {
     return data;
 }
 
-},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2qEF7":[function(require,module,exports) {
+},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./view/view":"eOwXc"}],"2qEF7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
@@ -549,14 +558,30 @@ parcelHelpers.export(exports, "submitValue", ()=>submitValue
 );
 parcelHelpers.export(exports, "clearFields", ()=>clearFields
 );
+parcelHelpers.export(exports, "swapPage", ()=>swapPage
+);
+parcelHelpers.export(exports, "link", ()=>link
+);
 var _base = require("./base");
+var _config = require("../config/config");
 function renderCards(arr) {
     let str = "";
     arr.filter((item, idx)=>idx <= 3
     ).forEach((item)=>{
-        str += `<div class="movie-card">\n        <div class="movie-image"></div>\n        <h4 class="movie-title">${item.title}</h4>\n        <h6>Sep 12, 2013</h6>\n        <div class="movie-rating">83%</div>\n      </div>`;
+        str += `<div class="movie-card">\n        <div class="movie-image"></div>\n        <h4 class="movie-title">${item.title || item.name}</h4>\n        <h6>Sep 12, 2013</h6>\n        <div class="movie-rating">83%</div>\n      </div>`;
     });
     _base.elements.cardContainer.innerHTML = str;
+}
+let link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+function swapPage(e) {
+    let textContent = e.target.textContent.trim();
+    if (textContent === "On TV") {
+        link = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+        console.log("HELLO1");
+    } else if (textContent === "For Rent") link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+    else if (textContent === "In Theaters") link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+    else if (textContent === "Streaming") link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    return link;
 }
 function showSpinner() {
     _base.elements.spinner.classList.remove("hide");
@@ -577,7 +602,7 @@ function clearFields() {
     _base.elements.input.value = "";
 }
 
-},{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lrDl3":[function(require,module,exports) {
+},{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../config/config":"2qEF7"}],"lrDl3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "elements", ()=>elements
@@ -587,7 +612,8 @@ const elements = {
     eachCard: document.querySelector(".popular-cards .movie-card"),
     spinner: document.querySelector(".popular-cards .spinner"),
     form: document.querySelector(".background form"),
-    input: document.querySelector(".background form input")
+    input: document.querySelector(".background form input"),
+    categories: document.querySelector(".popular .categories")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")
