@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This will be a movie info application",
   "main": "index.js",
+  "browserslist": [
+    "last 3 Chrome versions"
+  ],
   "scripts": {
     "dev": "parcel src/index.html",
     "production": "parcel build src/index.html"
