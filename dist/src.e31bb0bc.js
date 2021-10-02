@@ -124,7 +124,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.API_KEY = void 0;
-const API_KEY = "a8edf7b45e1c6692b59785f6dab10624";
+const API_KEY = "e0c487d1bc7b935539db0b8a0bab274a";
 exports.API_KEY = API_KEY;
 },{}],"models.js":[function(require,module,exports) {
 "use strict";
@@ -276,7 +276,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56564" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37967" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
