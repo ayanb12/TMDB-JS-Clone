@@ -117,58 +117,138 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"models.js":[function(require,module,exports) {
+})({"config/config.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getMovies = getMovies;
+exports.API_KEY = void 0;
+const API_KEY = "a8edf7b45e1c6692b59785f6dab10624";
+exports.API_KEY = API_KEY;
+},{}],"models.js":[function(require,module,exports) {
+"use strict";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchPopularMovies = fetchPopularMovies;
+exports.fetchSearchResult = fetchSearchResult;
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var _config = require("./config/config");
 
-//get popular movies from server
-function getMovies() {
-  return _getMovies.apply(this, arguments);
+// For storing and fetching any data
+async function fetchPopularMovies() {
+  let result = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`);
+  let data = await result.json();
+  return data;
 }
 
-function _getMovies() {
-  _getMovies = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var value, data;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch("https://api.themoviedb.org/3/movie/popular?api_key=38e228f3438faeda18e3f67f7b45310b&language=en-US&page=1");
-
-          case 2:
-            value = _context.sent;
-            _context.next = 5;
-            return value.json();
-
-          case 5:
-            data = _context.sent;
-            return _context.abrupt("return", data);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _getMovies.apply(this, arguments);
+async function fetchSearchResult(query) {
+  let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
+  let data = await result.json();
+  return data;
 }
-},{}],"index.js":[function(require,module,exports) {
+},{"./config/config":"config/config.js"}],"view/base.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.elements = void 0;
+const elements = {
+  cardContainer: document.querySelector(".popular-cards"),
+  eachCard: document.querySelector(".popular-cards .movie-card"),
+  spinner: document.querySelector(".popular-cards .spinner"),
+  form: document.querySelector(".background form"),
+  input: document.querySelector(".background form input")
+};
+exports.elements = elements;
+},{}],"view/view.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderCards = renderCards;
+exports.showSpinner = showSpinner;
+exports.clearSpinner = clearSpinner;
+exports.takeInput = takeInput;
+exports.submitValue = submitValue;
+exports.clearFields = clearFields;
+
+var _base = require("./base");
+
+function renderCards(arr) {
+  let str = "";
+  arr.filter((item, idx) => idx <= 3).forEach(item => {
+    str += `<div class="movie-card">
+        <div class="movie-image"></div>
+        <h4 class="movie-title">${item.title}</h4>
+        <h6>Sep 12, 2013</h6>
+        <div class="movie-rating">83%</div>
+      </div>`;
+  });
+  _base.elements.cardContainer.innerHTML = str;
+}
+
+function showSpinner() {
+  _base.elements.spinner.classList.remove("hide");
+}
+
+function clearSpinner() {
+  _base.elements.spinner.classList.add("hide");
+}
+
+let value = "";
+
+function takeInput(e) {
+  value = e.target.value;
+}
+
+function submitValue(e) {
+  e.preventDefault();
+  return value;
+}
+
+function clearFields() {
+  value = "";
+  _base.elements.input.value = "";
+}
+},{"./base":"view/base.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _models = require("./models");
 
-(0, _models.getMovies)();
-},{"./models":"models.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var _view = require("./view/view");
+
+var _base = require("./view/base");
+
+// Controller
+async function loadPopularData() {
+  (0, _view.showSpinner)();
+  let {
+    results
+  } = await (0, _models.fetchPopularMovies)();
+  (0, _view.clearSpinner)();
+  (0, _view.renderCards)(results);
+}
+
+loadPopularData();
+
+_base.elements.input.addEventListener("change", _view.takeInput);
+
+let searchresult = "";
+
+_base.elements.form.addEventListener("submit", async e => {
+  searchresult = (0, _view.submitValue)(e);
+  (0, _view.clearFields)();
+  let {
+    results
+  } = await (0, _models.fetchSearchResult)(searchresult.trim());
+  (0, _view.renderCards)(results);
+});
+},{"./models":"models.js","./view/view":"view/view.js","./view/base":"view/base.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -196,7 +276,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34495" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58403" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

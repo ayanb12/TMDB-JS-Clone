@@ -22,10 +22,9 @@ loadPopularData();
 elements.input.addEventListener("change", takeInput);
 
 let searchresult = "";
-let searchApiData = null;
 elements.form.addEventListener("submit", async (e) => {
   searchresult = submitValue(e);
   clearFields();
-  searchApiData = await fetchSearchResult(searchresult.trim());
-  console.log(searchApiData);
+  let { results } = await fetchSearchResult(searchresult.trim());
+  renderCards(results);
 });
