@@ -7,6 +7,7 @@ import {
   submitValue,
   takeInput,
   clearFields,
+  swapPage,
 } from "./view/view";
 import { elements } from "./view/base";
 
@@ -28,3 +29,10 @@ elements.form.addEventListener("submit", async (e) => {
   let { results } = await fetchSearchResult(searchresult.trim());
   renderCards(results);
 });
+elements.categories.addEventListener("click",async (e)=>{
+  let link=  swapPage(e)
+  let { results }=await fetchPopularMovies(link.trim())
+  console.log(results)
+  renderCards(results)
+  console.log(link.trim())
+})
