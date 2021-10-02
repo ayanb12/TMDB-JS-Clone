@@ -468,12 +468,11 @@ async function loadPopularData() {
 loadPopularData();
 _base.elements.input.addEventListener("change", _view.takeInput);
 let searchresult = "";
-let searchApiData = null;
 _base.elements.form.addEventListener("submit", async (e)=>{
     searchresult = _view.submitValue(e);
     _view.clearFields();
-    searchApiData = await _models.fetchSearchResult(searchresult.trim());
-    console.log(searchApiData);
+    let { results  } = await _models.fetchSearchResult(searchresult.trim());
+    _view.renderCards(results);
 });
 
 },{"./models":"ihxjA","./view/view":"eOwXc","./view/base":"lrDl3"}],"ihxjA":[function(require,module,exports) {
@@ -557,7 +556,7 @@ function renderCards(arr) {
     ).forEach((item)=>{
         str += `<div class="movie-card">\n        <div class="movie-image"></div>\n        <h4 class="movie-title">${item.title}</h4>\n        <h6>Sep 12, 2013</h6>\n        <div class="movie-rating">83%</div>\n      </div>`;
     });
-    _base.elements.cardContainer.innerHTML += str;
+    _base.elements.cardContainer.innerHTML = str;
 }
 function showSpinner() {
     _base.elements.spinner.classList.remove("hide");
