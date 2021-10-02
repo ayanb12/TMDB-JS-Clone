@@ -12,7 +12,7 @@ function renderCards(arr) {
         <div class="movie-rating">83%</div>
       </div>`;
     });
-  elements.cardContainer.innerHTML += str;
+  elements.cardContainer.innerHTML = str;
 }
 
 function showSpinner() {
