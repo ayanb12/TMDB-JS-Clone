@@ -124,32 +124,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.API_KEY = void 0;
-const API_KEY = "e0c487d1bc7b935539db0b8a0bab274a";
+const API_KEY = "a8edf7b45e1c6692b59785f6dab10624";
 exports.API_KEY = API_KEY;
-},{}],"models.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchPopularMovies = fetchPopularMovies;
-exports.fetchSearchResult = fetchSearchResult;
-
-var _config = require("./config/config");
-
-// For storing and fetching any data
-async function fetchPopularMovies() {
-  let result = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`);
-  let data = await result.json();
-  return data;
-}
-
-async function fetchSearchResult(query) {
-  let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
-  let data = await result.json();
-  return data;
-}
-},{"./config/config":"config/config.js"}],"view/base.js":[function(require,module,exports) {
+},{}],"view/base.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -161,10 +138,149 @@ const elements = {
   eachCard: document.querySelector(".popular-cards .movie-card"),
   spinner: document.querySelector(".popular-cards .spinner"),
   form: document.querySelector(".background form"),
-  input: document.querySelector(".background form input")
+  input: document.querySelector(".background form input"),
+  categories: document.querySelector(".popular .categories"),
+  latestCardContainer: document.querySelector(".latest-cards"),
+  trendingCardContainer: document.querySelector(".trending-cards"),
+  trendingCategories: document.querySelector(".trending .categories"),
+  latestCategories: document.querySelector(".latest .categories")
 };
 exports.elements = elements;
-},{}],"view/view.js":[function(require,module,exports) {
+},{}],"models.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchPopularMovies = fetchPopularMovies;
+exports.fetchSearchResult = fetchSearchResult;
+exports.fetchLatestData = fetchLatestData;
+exports.fetchTrendingData = fetchTrendingData;
+exports.swapPage = swapPage;
+exports.swapTrending = swapTrending;
+exports.swapLatest = swapLatest;
+
+var _config = require("./config/config");
+
+var _base = require("./view/base");
+
+// For storing and fetching any data
+let link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+
+async function fetchPopularMovies(url = link) {
+  let result = await fetch(`${url}`);
+  let data = await result.json();
+  console.log(data);
+  return data;
+}
+
+let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=a8edf7b45e1c6692b59785f6dab10624&language=en-US&page=1`;
+
+async function fetchLatestData(url = linkLatest) {
+  let result = await fetch(`${url}`);
+  let data = await result.json();
+  return data;
+}
+
+async function fetchTrendingData(url = linktrending) {
+  let result = await fetch(`${url}`);
+  let data = await result.json();
+  return data;
+}
+
+fetchLatestData();
+
+async function fetchSearchResult(query) {
+  let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
+  let data = await result.json();
+  return data;
+} //  Async functions end
+
+
+function swapPage(e) {
+  let textContent = e.target.textContent.trim();
+
+  for (let i = 0; i < _base.elements.categories.children.length; i++) {
+    if (_base.elements.categories.children[i].classList.contains("active")) {
+      _base.elements.categories.children[i].classList.remove("active");
+    }
+  }
+
+  if (textContent === "On TV") {
+    link = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+    console.log("HELLO1");
+  } else if (textContent === "For Rent") {
+    link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+  } else if (textContent === "In Theaters") {
+    link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+  } else if (textContent === "Streaming") {
+    link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  }
+
+  return link;
+} //swap page ends
+
+
+let linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
+
+function swapTrending(e) {
+  for (let i = 0; i < _base.elements.trendingCategories.children.length; i++) {
+    if (_base.elements.trendingCategories.children[i].classList.contains("active")) {
+      _base.elements.trendingCategories.children[i].classList.remove("active");
+    }
+  }
+
+  let text = e.target.textContent.trim();
+
+  if (text === "Today") {
+    linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
+    e.target.classList.add("active");
+  } else if (text === "This Week") {
+    linktrending = `https://api.themoviedb.org/3/trending/movie/week?api_key=${_config.API_KEY}`;
+    e.target.classList.add("active");
+  }
+
+  return linktrending;
+} //swap trending ends
+
+
+function swapLatest(e) {
+  let textContent = e.target.textContent.trim();
+
+  for (let i = 0; i < _base.elements.latestCategories.children.length; i++) {
+    if (_base.elements.latestCategories.children[i].classList.contains("active")) {
+      _base.elements.latestCategories.children[i].classList.remove("active");
+    }
+  }
+
+  if (textContent === "On TV") {
+    linkLatest = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+    console.log("HELLO1");
+  } else if (textContent === "For Rent") {
+    linkLatest = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+  } else if (textContent === "In Theaters") {
+    linkLatest = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1
+    `;
+    e.target.classList.add("active");
+  } else if (textContent === "Streaming") {
+    linkLatest = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  }
+
+  return linkLatest;
+}
+},{"./config/config":"config/config.js","./view/base":"view/base.js"}],"view/view.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -176,20 +292,49 @@ exports.clearSpinner = clearSpinner;
 exports.takeInput = takeInput;
 exports.submitValue = submitValue;
 exports.clearFields = clearFields;
+exports.renderLatest = renderLatest;
+exports.renderTrending = renderTrending;
 
 var _base = require("./base");
 
 function renderCards(arr) {
+  let month = ["Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
   let str = "";
-  arr.filter((item, idx) => idx <= 3).forEach(item => {
+  arr.filter((item, idx) => idx <= 6).forEach(item => {
     str += `<div class="movie-card">
         <div class="movie-image"></div>
-        <h4 class="movie-title">${item.title}</h4>
-        <h6>Sep 12, 2013</h6>
-        <div class="movie-rating">83%</div>
+        <h4 class="movie-title">${item.title || item.name}</h4>
+        <h6>27 aug,2020</h6>
+        <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>
       </div>`;
   });
   _base.elements.cardContainer.innerHTML = str;
+}
+
+function renderTrending(arr) {
+  let month = ["Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  let str = "";
+  arr.filter((item, idx) => idx <= 6).forEach(item => {
+    str += `<div class="movie-card">
+            <div class="movie-image"></div>
+            <h4 class="movie-title">${item.title || item.name}</h4>
+            <h6>${month[Number(item.release_date.substring(5, 7)) - 1]}, ${item.release_date.substring(0, 4)}</h6>
+            <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>
+            </div>`;
+  });
+  _base.elements.trendingCardContainer.innerHTML = str;
+}
+
+function renderLatest(arr, x) {
+  let str = "";
+  arr.filter((item, idx) => idx >= 4 && idx <= 7).forEach(item => {
+    str += `<div class="movie-card">
+      <div class="movie-image"></div>
+      <h4 class="movie-title">${item.title || item.name}</h4>
+      <h6>${item.first_air_date || item.release_date || ""} </h6>
+    </div>`;
+  });
+  _base.elements.latestCardContainer.innerHTML = str;
 }
 
 function showSpinner() {
@@ -236,6 +381,29 @@ async function loadPopularData() {
 
 loadPopularData();
 
+async function loadlatestData() {
+  (0, _view.showSpinner)();
+  let {
+    results
+  } = await (0, _models.fetchLatestData)();
+  console.log(results);
+  (0, _view.clearSpinner)();
+  (0, _view.renderLatest)(results);
+}
+
+async function loadtrendingData() {
+  (0, _view.showSpinner)();
+  let {
+    results
+  } = await (0, _models.fetchTrendingData)();
+  console.log(results);
+  (0, _view.clearSpinner)();
+  (0, _view.renderTrending)(results);
+}
+
+loadtrendingData();
+loadlatestData();
+
 _base.elements.input.addEventListener("change", _view.takeInput);
 
 let searchresult = "";
@@ -247,6 +415,34 @@ _base.elements.form.addEventListener("submit", async e => {
     results
   } = await (0, _models.fetchSearchResult)(searchresult.trim());
   (0, _view.renderCards)(results);
+});
+
+_base.elements.categories.addEventListener("click", async e => {
+  console.log(e);
+  let link = (0, _models.swapPage)(e);
+  let {
+    results
+  } = await (0, _models.fetchPopularMovies)(link.trim());
+  console.log(results);
+  (0, _view.renderCards)(results);
+  console.log(link.trim());
+});
+
+_base.elements.trendingCategories.addEventListener("click", async e => {
+  let link = (0, _models.swapTrending)(e);
+  let {
+    results
+  } = await (0, _models.fetchTrendingData)(link.trim());
+  (0, _view.renderTrending)(results);
+});
+
+_base.elements.latestCategories.addEventListener("click", async e => {
+  let link = (0, _models.swapLatest)(e);
+  let {
+    results
+  } = await (0, _models.fetchLatestData)(link.trim());
+  console.log(results);
+  (0, _view.renderLatest)(results);
 });
 },{"./models":"models.js","./view/view":"view/view.js","./view/base":"view/base.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -276,7 +472,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37967" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64017" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
