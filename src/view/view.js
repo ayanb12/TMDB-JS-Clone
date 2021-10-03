@@ -1,36 +1,51 @@
 import { elements } from "./base";
 import {API_KEY} from "../config/config"
-function renderCards(arr) {
+function renderCards(arr,) {
+  let month=["Jan","Feb","March","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+
   let str = "";
   arr
-    .filter((item, idx) => idx <= 3)
+    .filter((item, idx) => idx <= 6)
     .forEach((item) => {
       str += `<div class="movie-card">
         <div class="movie-image"></div>
         <h4 class="movie-title">${item.title || item.name}</h4>
-        <h6>Sep 12, 2013</h6>
-        <div class="movie-rating">83%</div>
+        <h6>27 aug,2020</h6>
+        <div class="movie-rating">${parseInt(Number((item.vote_average)/10)*100)}</div>
       </div>`;
     });
-  elements.cardContainer.innerHTML = str;
-}
-let link=`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+      elements.cardContainer.innerHTML=str;
+    }
+    function renderTrending(arr,) {
+      let month=["Jan","Feb","March","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
 
-function swapPage(e){
-  let textContent=e.target.textContent.trim();
-  if(textContent==="On TV"){
-    link=`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1
-    `
-    console.log("HELLO1")
-  }else if(textContent==="For Rent"){
-    link=`  https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1
-    `
-  }else if(textContent==="In Theaters"){
-    link=`  https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=1
-    `
-  }else if(textContent==="Streaming")
-  link=`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
-  return link
+      let str = "";
+      arr
+        .filter((item, idx) => idx <= 6)
+        .forEach((item) => {
+          str += `<div class="movie-card">
+            <div class="movie-image"></div>
+            <h4 class="movie-title">${item.title || item.name}</h4>
+            <h6>${month[Number(item.release_date.substring(5,7))-1] }, ${item.release_date.substring(0,4)}</h6>
+            <div class="movie-rating">${parseInt(Number((item.vote_average)/10)*100)}</div>
+            </div>`;
+        });
+          elements.trendingCardContainer.innerHTML=str;
+        }
+    
+function renderLatest(arr,x){
+  let str = "";
+  arr
+    .filter((item, idx) => idx >= 4 && idx<=7)
+    .forEach((item) => {
+      str +=`<div class="movie-card">
+      <div class="movie-image"></div>
+      <h4 class="movie-title">${item.title}</h4>
+      <h6>${item.original_title}</h6>
+    </div>`
+});
+elements.latestCardContainer.innerHTML=str;
+
 }
 function showSpinner() {
   elements.spinner.classList.remove("hide");
@@ -62,6 +77,8 @@ export {
   takeInput,
   submitValue,
   clearFields,
-  swapPage,
-  link,
+
+  
+  renderLatest,
+  renderTrending,
 };
