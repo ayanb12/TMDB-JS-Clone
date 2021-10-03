@@ -6,5 +6,7 @@ export const elements = {
   input: document.querySelector(".background form input"),
   categories:document.querySelector(".popular .categories"),
   latestCardContainer:document.querySelector(".latest-cards"),
-  trendingCardContainer:document.querySelector(".trending-cards")
+  trendingCardContainer:document.querySelector(".trending-cards"),
+  trendingCategories:document.querySelector(".trending .categories"),
+
 };

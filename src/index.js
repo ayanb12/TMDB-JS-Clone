@@ -1,5 +1,5 @@
 // Controller
-import { fetchPopularMovies, fetchSearchResult,fetchLatestData,fetchTrendingData,swapPage} from "./models";
+import { fetchPopularMovies, fetchSearchResult,fetchLatestData,fetchTrendingData,swapPage,swapTrending} from "./models";
 import {
   renderCards,
   showSpinner,
@@ -10,7 +10,7 @@ import {
   
   renderLatest,
   renderTrending,
-  
+
 } from "./view/view";
 import { elements } from "./view/base";
 
@@ -55,4 +55,9 @@ elements.categories.addEventListener("click",async (e)=>{
   console.log(results)
   renderCards(results)
   console.log(link.trim())
+})
+elements.trendingCategories.addEventListener("click",async (e)=>{
+  let link=swapTrending(e)
+  let {results}=await fetchTrendingData(link.trim())
+  renderTrending(results)
 })

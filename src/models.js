@@ -32,6 +32,28 @@ function swapPage(e){
 
   return link
 }
+let linktrending=`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
+
+function swapTrending(e){
+  for(let i=0;i<elements.trendingCategories.children.length;i++){
+    if(elements.trendingCategories.children[i].classList.contains("active")){
+      elements.trendingCategories.children[i].classList.remove("active")
+    }
+  }
+
+let text=e.target.textContent.trim();
+
+if(text==="Today"){
+  linktrending=`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}` 
+  e.target.classList.add("active")
+
+}else if(text==="This Week"){
+  linktrending=`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
+  e.target.classList.add("active")
+
+}
+return linktrending;
+}
 
 async function fetchPopularMovies(url=link) {
   let result = await fetch(
@@ -51,7 +73,6 @@ async function fetchLatestData(url=linkLatest){
   let data = await result.json();
     return data
 }
-let linktrending=`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
 async function fetchTrendingData(url=linktrending){
   let result = await fetch(
     `${url}`
@@ -71,4 +92,4 @@ async function fetchSearchResult(query) {
 
   return data;
 }
-export { fetchPopularMovies, fetchSearchResult,fetchLatestData ,fetchTrendingData,swapPage};
+export { fetchPopularMovies, fetchSearchResult,fetchLatestData ,fetchTrendingData,swapPage,swapTrending};

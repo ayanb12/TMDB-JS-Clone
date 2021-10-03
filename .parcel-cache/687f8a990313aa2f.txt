@@ -1,4 +1,4 @@
-33687
+33690
 57C:\Users\Sourav\Desktop\Web-App\src\images\footerlogo.svg132777223096981351 0
 70C:\Users\Sourav\Desktop\Web-App\node_modules\lodash\fp\escapeRegExp.js121436361000000000 0
 73C:\Users\Sourav\Desktop\Web-App\node_modules\@babel\template\package.json121012626000000000 0
@@ -81,7 +81,7 @@
 71C:\Users\Sourav\Desktop\Web-App\node_modules\svgo\plugins\reusePaths.js121436361000000000 0
 67C:\Users\Sourav\Desktop\Web-App\node_modules\msgpackr\tests\test.js121436361000000000 0
 56C:\Users\Sourav\Desktop\Web-App\node_modules\request\lib132777226321292413 1
-36C:\Users\Sourav\Desktop\Web-App\dist132777358454831847 1
+36C:\Users\Sourav\Desktop\Web-App\dist132777406827581613 1
 77C:\Users\Sourav\Desktop\Web-App\node_modules\es-abstract\2016\IteratorNext.js121436361000000000 0
 101C:\Users\Sourav\Desktop\Web-App\node_modules\snapdragon\node_modules\is-accessor-descriptor\README.md130957681300000000 0
 90C:\Users\Sourav\Desktop\Web-App\node_modules\domhandler\test\cases\05-tags_in_comment.json131385971350000000 0
@@ -166,7 +166,7 @@
 65C:\Users\Sourav\Desktop\Web-App\node_modules\connect\node_modules132777224720121410 1
 79C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\fn\object\define-getter.js121436361000000000 0
 77C:\Users\Sourav\Desktop\Web-App\node_modules\iconv-lite\encodings\internal.js131794416590000000 0
-35C:\Users\Sourav\Desktop\Web-App\src132777348727282123 1
+35C:\Users\Sourav\Desktop\Web-App\src132777361144869871 1
 117C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\reporter-dev-server\node_modules\fast-glob\out\providers\filters132777226526567487 1
 108C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\core\node_modules\@parcel\utils\src\prettyDiagnostic.js121436361000000000 0
 67C:\Users\Sourav\Desktop\Web-App\node_modules\mimic-response\license121436361000000000 0
@@ -250,7 +250,7 @@
 95C:\Users\Sourav\Desktop\Web-App\node_modules\parcel\node_modules\@parcel\workers\lib\backend.js121436361000000000 0
 63C:\Users\Sourav\Desktop\Web-App\node_modules\lodash\isObject.js121436361000000000 0
 102C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-posthtml\node_modules\posthtml-parser132777226334552229 1
-44C:\Users\Sourav\Desktop\Web-App\src\index.js132777348726974199 0
+44C:\Users\Sourav\Desktop\Web-App\src\index.js132777377995939275 0
 90C:\Users\Sourav\Desktop\Web-App\node_modules\domhandler\test\cases\13-comment_in_text.json131385971350000000 0
 87C:\Users\Sourav\Desktop\Web-App\node_modules\sharp\vendor\8.10.6\include\vips\version.h132612604640000000 0
 69C:\Users\Sourav\Desktop\Web-App\node_modules\extsprintf\Makefile.targ130610031810000000 0
@@ -266,7 +266,7 @@
 49C:\Users\Sourav\Desktop\Web-App\node_modules\.bin132777227047060451 1
 71C:\Users\Sourav\Desktop\Web-App\node_modules\uri-js\dist\es5\uri.all.js121436361000000000 0
 114C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-html\node_modules\domutils\lib\traversal.d.ts.map121436361000000000 0
-45C:\Users\Sourav\Desktop\Web-App\src\models.js132777358452872859 0
+45C:\Users\Sourav\Desktop\Web-App\src\models.js132777380116279125 0
 55C:\Users\Sourav\Desktop\Web-App\node_modules\cli-cursor132777225837251394 1
 66C:\Users\Sourav\Desktop\Web-App\node_modules\sprintf-js\.npmignore130434101930000000 0
 71C:\Users\Sourav\Desktop\Web-App\node_modules\static-module\test\brfs.js121436361000000000 0
@@ -275,10 +275,10 @@
 83C:\Users\Sourav\Desktop\Web-App\node_modules\string.prototype.trimstart\polyfill.js121436361000000000 0
 83C:\Users\Sourav\Desktop\Web-App\node_modules\@nodelib\fs.walk\out\providers\sync.js121436361000000000 0
 97C:\Users\Sourav\Desktop\Web-App\node_modules\sharp\vendor\8.10.6\include\glib-2.0\glib\gscanner.h132612604640000000 0
-40C:\Users\Sourav\Desktop\Web-App\src\view132777348727431125 1
+40C:\Users\Sourav\Desktop\Web-App\src\view132777361144869871 1
 58C:\Users\Sourav\Desktop\Web-App\node_modules\lodash\lte.js121436361000000000 0
 69C:\Users\Sourav\Desktop\Web-App\node_modules\lodash\fp\curryRightN.js121436361000000000 0
-48C:\Users\Sourav\Desktop\Web-App\src\view\base.js132777348727411261 0
+48C:\Users\Sourav\Desktop\Web-App\src\view\base.js132777372668102896 0
 109C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-css\node_modules\@parcel\logger\package.json121436361000000000 0
 75C:\Users\Sourav\Desktop\Web-App\node_modules\parcel-bundler\src\Resolver.js121436361000000000 0
 57C:\Users\Sourav\Desktop\Web-App\node_modules\range-parser132777225885806908 1
@@ -312,7 +312,7 @@
 63C:\Users\Sourav\Desktop\Web-App\node_modules\lodash\_WeakMap.js121436361000000000 0
 116C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-babel\node_modules\core-js\features\regexp\index.js121436361000000000 0
 100C:\Users\Sourav\Desktop\Web-App\node_modules\sharp\vendor\8.10.6\include\freetype2\freetype\ftlist.h132612604640000000 0
-48C:\Users\Sourav\Desktop\Web-App\src\view\view.js132777355934350718 0
+48C:\Users\Sourav\Desktop\Web-App\src\view\view.js132777404867386771 0
 91C:\Users\Sourav\Desktop\Web-App\node_modules\svgo\plugins\removeNonInheritableGroupAttrs.js121436361000000000 0
 52C:\Users\Sourav\Desktop\Web-App\node_modules\esprima132777226091312506 1
 112C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-posthtml\node_modules\@parcel\utils\src\hash.js121436361000000000 0
@@ -9128,7 +9128,7 @@
 97C:\Users\Sourav\Desktop\Web-App\node_modules\babel-runtime\helpers\possible-constructor-return.js131473721030000000 0
 62C:\Users\Sourav\Desktop\Web-App\node_modules\parse5\lib\parser132777226478111034 1
 98C:\Users\Sourav\Desktop\Web-App\node_modules\sharp\vendor\8.10.6\include\libxml2\libxml\encoding.h132612604640000000 0
-125C:\Users\Sourav\Desktop\Web-App\dist\blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.e8249ac1.svg132777357496714129 0
+125C:\Users\Sourav\Desktop\Web-App\dist\blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.e8249ac1.svg132777376291186652 0
 104C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\cache\node_modules\fast-glob\out\providers\async.js121436361000000000 0
 82C:\Users\Sourav\Desktop\Web-App\node_modules\highlight.js\styles\atom-one-dark.css121436361000000000 0
 100C:\Users\Sourav\Desktop\Web-App\node_modules\sharp\vendor\8.10.6\include\libxml2\libxml\HTMLparser.h132612604640000000 0
@@ -20929,7 +20929,7 @@
 60C:\Users\Sourav\Desktop\Web-App\node_modules\debug\README.md121436361000000000 0
 65C:\Users\Sourav\Desktop\Web-App\node_modules\debug\src\browser.js121436361000000000 0
 113C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\cache\node_modules\@nodelib\fs.stat\out\providers\async.d.ts121436361000000000 0
-57C:\Users\Sourav\Desktop\Web-App\dist\loader2.3f6190a1.gif132777357495807839 0
+57C:\Users\Sourav\Desktop\Web-App\dist\loader2.3f6190a1.gif132777404064518553 0
 81C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\modules\_own-keys.js121436361000000000 0
 63C:\Users\Sourav\Desktop\Web-App\node_modules\debug\src\index.js121436361000000000 0
 60C:\Users\Sourav\Desktop\Web-App\node_modules\deasync\.github132777226896431921 1
@@ -21917,7 +21917,7 @@
 78C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\modules\_object-create.js121436361000000000 0
 78C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\modules\_object-define.js121436361000000000 0
 111C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\core\node_modules\fast-glob\out\providers\filters\error.js121436361000000000 0
-55C:\Users\Sourav\Desktop\Web-App\dist\index.835a2c33.css132777357521549607 0
+55C:\Users\Sourav\Desktop\Web-App\dist\index.835a2c33.css132777376311036765 0
 75C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\modules\_object-dps.js121436361000000000 0
 66C:\Users\Sourav\Desktop\Web-App\node_modules\base-x\src\index.d.ts121436361000000000 0
 101C:\Users\Sourav\Desktop\Web-App\node_modules\@babel\plugin-transform-named-capturing-groups-regex\lib132777225879054284 1
@@ -22261,7 +22261,7 @@
 73C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\global.js121436361000000000 0
 70C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\map.js121436361000000000 0
 70C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\object132777226997022749 1
-58C:\Users\Sourav\Desktop\Web-App\dist\index.5cb7de60.js.map132777358454802070 0
+58C:\Users\Sourav\Desktop\Web-App\dist\index.5cb7de60.js.map132777406827512073 0
 80C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\set-immediate.js121436361000000000 0
 79C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\set-interval.js121436361000000000 0
 70C:\Users\Sourav\Desktop\Web-App\node_modules\core-js\library\fn\set.js121436361000000000 0
@@ -25594,7 +25594,7 @@
 129C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-react-refresh-wrap\node_modules\@parcel\utils\lib\escape-html.js121436361000000000 0
 138C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-react-refresh-wrap\node_modules\@parcel\utils\lib\generateBuildMetrics.js121436361000000000 0
 103C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\runtime-js\node_modules\@parcel\utils\package.json121436361000000000 0
-65C:\Users\Sourav\Desktop\Web-App\dist\freetowatchlogo.1190f2f6.jpg132777357496505534 0
+65C:\Users\Sourav\Desktop\Web-App\dist\freetowatchlogo.1190f2f6.jpg132777404061784578 0
 137C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-react-refresh-wrap\node_modules\@parcel\utils\lib\generateCertificate.js121436361000000000 0
 121C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-babel\node_modules\core-js\es\number\min-safe-integer.js121436361000000000 0
 129C:\Users\Sourav\Desktop\Web-App\node_modules\@parcel\transformer-react-refresh-wrap\node_modules\@parcel\utils\lib\getExisting.js121436361000000000 0
@@ -33632,19 +33632,22 @@
 58C:\Users\Sourav\Desktop\Web-App\node_modules\.bin\uuid.ps1132777227047060451 0
 55C:\Users\Sourav\Desktop\Web-App\node_modules\.bin\which132777227047140381 0
 59C:\Users\Sourav\Desktop\Web-App\node_modules\.bin\which.cmd132777227047140381 0
-77C:\Users\Sourav\Desktop\Web-App\dist\6LfVuZBiOOCtqch5Ukspjb9y0EB.70377fb3.jpg132777357495807839 0
-68C:\Users\Sourav\Desktop\Web-App\dist\backgroundTrending.3bbf9ac9.svg132777357496704194 0
-77C:\Users\Sourav\Desktop\Web-App\dist\bGZn5RVzMMXju4ev7xbl1aLdXqq.0c8d0235.jpg132777357495807839 0
+77C:\Users\Sourav\Desktop\Web-App\dist\6LfVuZBiOOCtqch5Ukspjb9y0EB.70377fb3.jpg132777404060881541 0
+68C:\Users\Sourav\Desktop\Web-App\dist\backgroundTrending.3bbf9ac9.svg132777376295693905 0
+78C:\Users\Sourav\Desktop\Web-App\dist\backgroundTrending.3bbf9ac9.svg.237373292132777404065541691 0
+77C:\Users\Sourav\Desktop\Web-App\dist\bGZn5RVzMMXju4ev7xbl1aLdXqq.0c8d0235.jpg132777404060881541 0
 125C:\Users\Sourav\Desktop\Web-App\dist\blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.9175184f.svg132777223095887956 0
-60C:\Users\Sourav\Desktop\Web-App\dist\footerlogo.17981abd.svg132777357496724072 0
-54C:\Users\Sourav\Desktop\Web-App\dist\index.5cb7de60.js132777358454523919 0
-59C:\Users\Sourav\Desktop\Web-App\dist\index.835a2c33.css.map132777357521658871 0
-47C:\Users\Sourav\Desktop\Web-App\dist\index.html132777357521549607 0
-67C:\Users\Sourav\Desktop\Web-App\dist\latest-background.8bb4e88b.jpg132777357496475728 0
+136C:\Users\Sourav\Desktop\Web-App\dist\blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.e8249ac1.svg.3276235437132777404065809897 0
+60C:\Users\Sourav\Desktop\Web-App\dist\footerlogo.17981abd.svg132777376291186652 0
+71C:\Users\Sourav\Desktop\Web-App\dist\footerlogo.17981abd.svg.3329103681132777404069918324 0
+54C:\Users\Sourav\Desktop\Web-App\dist\index.5cb7de60.js132777406827263739 0
+59C:\Users\Sourav\Desktop\Web-App\dist\index.835a2c33.css.map132777376311684482 0
+47C:\Users\Sourav\Desktop\Web-App\dist\index.html132777376311026839 0
+67C:\Users\Sourav\Desktop\Web-App\dist\latest-background.8bb4e88b.jpg132777404060891466 0
 67C:\Users\Sourav\Desktop\Web-App\dist\latest-background.e3551842.jpg132777223096044168 0
 53C:\Users\Sourav\Desktop\Web-App\dist\main.c52e0fe2.js132777223096200364 0
 57C:\Users\Sourav\Desktop\Web-App\dist\main.c52e0fe2.js.map132777223096200364 0
-56C:\Users\Sourav\Desktop\Web-App\dist\photo1.a682c053.jpg132777357495807839 0
+56C:\Users\Sourav\Desktop\Web-App\dist\photo1.a682c053.jpg132777404060881541 0
 56C:\Users\Sourav\Desktop\Web-App\dist\photo1.a99eee60.jpg132777223096200364 0
 56C:\Users\Sourav\Desktop\Web-App\dist\src.e31bb0bc.js.map132777223096356567 0
 60C:\Users\Sourav\Desktop\Web-App\dist\Web-App.94e89cdd.js.map132777315634424281 0

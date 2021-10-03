@@ -498,6 +498,11 @@ _base.elements.categories.addEventListener("click", async (e)=>{
     _view.renderCards(results);
     console.log(link.trim());
 });
+_base.elements.trendingCategories.addEventListener("click", async (e)=>{
+    let link = _models.swapTrending(e);
+    let { results  } = await _models.fetchTrendingData(link.trim());
+    _view.renderTrending(results);
+});
 
 },{"./models":"ihxjA","./view/view":"eOwXc","./view/base":"lrDl3"}],"ihxjA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -511,6 +516,8 @@ parcelHelpers.export(exports, "fetchLatestData", ()=>fetchLatestData
 parcelHelpers.export(exports, "fetchTrendingData", ()=>fetchTrendingData
 );
 parcelHelpers.export(exports, "swapPage", ()=>swapPage
+);
+parcelHelpers.export(exports, "swapTrending", ()=>swapTrending
 );
 var _config = require("./config/config");
 var _base = require("./view/base");
@@ -535,6 +542,19 @@ function swapPage(e) {
     }
     return link;
 }
+let linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
+function swapTrending(e) {
+    for(let i = 0; i < _base.elements.trendingCategories.children.length; i++)if (_base.elements.trendingCategories.children[i].classList.contains("active")) _base.elements.trendingCategories.children[i].classList.remove("active");
+    let text = e.target.textContent.trim();
+    if (text === "Today") {
+        linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
+        e.target.classList.add("active");
+    } else if (text === "This Week") {
+        linktrending = `https://api.themoviedb.org/3/trending/movie/week?api_key=${_config.API_KEY}`;
+        e.target.classList.add("active");
+    }
+    return linktrending;
+}
 async function fetchPopularMovies(url = link) {
     let result = await fetch(`${url}`);
     let data = await result.json();
@@ -547,7 +567,6 @@ async function fetchLatestData(url = linkLatest) {
     let data = await result.json();
     return data;
 }
-let linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
 async function fetchTrendingData(url = linktrending) {
     let result = await fetch(`${url}`);
     let data = await result.json();
@@ -612,7 +631,8 @@ const elements = {
     input: document.querySelector(".background form input"),
     categories: document.querySelector(".popular .categories"),
     latestCardContainer: document.querySelector(".latest-cards"),
-    trendingCardContainer: document.querySelector(".trending-cards")
+    trendingCardContainer: document.querySelector(".trending-cards"),
+    trendingCategories: document.querySelector(".trending .categories")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eOwXc":[function(require,module,exports) {
