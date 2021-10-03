@@ -466,6 +466,22 @@ async function loadPopularData() {
     _view.renderCards(results);
 }
 loadPopularData();
+async function loadlatestData() {
+    _view.showSpinner();
+    let { results  } = await _models.fetchLatestData();
+    console.log(results);
+    _view.clearSpinner();
+    _view.renderLatest(results);
+}
+async function loadtrendingData() {
+    _view.showSpinner();
+    let { results  } = await _models.fetchTrendingData();
+    console.log(results);
+    _view.clearSpinner();
+    _view.renderTrending(results);
+}
+loadtrendingData();
+loadlatestData();
 _base.elements.input.addEventListener("change", _view.takeInput);
 let searchresult = "";
 _base.elements.form.addEventListener("submit", async (e)=>{
@@ -475,7 +491,7 @@ _base.elements.form.addEventListener("submit", async (e)=>{
     _view.renderCards(results);
 });
 _base.elements.categories.addEventListener("click", async (e)=>{
-    let link = _view.swapPage(e);
+    let link = _models.swapPage(e);
     let { results  } = await _models.fetchPopularMovies(link.trim());
     console.log(results);
     _view.renderCards(results);
@@ -489,22 +505,51 @@ parcelHelpers.export(exports, "fetchPopularMovies", ()=>fetchPopularMovies
 );
 parcelHelpers.export(exports, "fetchSearchResult", ()=>fetchSearchResult
 );
+parcelHelpers.export(exports, "fetchLatestData", ()=>fetchLatestData
+);
+parcelHelpers.export(exports, "fetchTrendingData", ()=>fetchTrendingData
+);
+parcelHelpers.export(exports, "swapPage", ()=>swapPage
+);
 var _config = require("./config/config");
-var _view = require("./view/view");
 // For storing and fetching any data
-async function fetchPopularMovies(url = _view.link) {
+let link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+function swapPage(e) {
+    let textContent = e.target.textContent.trim();
+    if (textContent === "On TV") {
+        link = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+        console.log("HELLO1");
+    } else if (textContent === "For Rent") link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+    else if (textContent === "In Theaters") link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+    else if (textContent === "Streaming") link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    return link;
+}
+async function fetchPopularMovies(url = link) {
     let result = await fetch(`${url}`);
     let data = await result.json();
     console.log(data);
     return data;
 }
+let linkLatest = `https://api.themoviedb.org/3/movie/upcoming?api_key=${_config.API_KEY}&language=en-US&page=1`;
+async function fetchLatestData(url = linkLatest) {
+    let result = await fetch(`${url}`);
+    let data = await result.json();
+    return data;
+}
+let linktrending = `https://api.themoviedb.org/3/trending/movie/day?api_key=${_config.API_KEY}`;
+async function fetchTrendingData(url = linktrending) {
+    let result = await fetch(`${url}`);
+    let data = await result.json();
+    return data;
+}
+fetchLatestData();
 async function fetchSearchResult(query) {
     let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
     let data = await result.json();
     return data;
 }
 
-},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./view/view":"eOwXc"}],"2qEF7":[function(require,module,exports) {
+},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2qEF7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
@@ -558,30 +603,63 @@ parcelHelpers.export(exports, "submitValue", ()=>submitValue
 );
 parcelHelpers.export(exports, "clearFields", ()=>clearFields
 );
-parcelHelpers.export(exports, "swapPage", ()=>swapPage
+parcelHelpers.export(exports, "renderLatest", ()=>renderLatest
 );
-parcelHelpers.export(exports, "link", ()=>link
+parcelHelpers.export(exports, "renderTrending", ()=>renderTrending
 );
 var _base = require("./base");
 var _config = require("../config/config");
 function renderCards(arr) {
+    let month = [
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+    ];
     let str = "";
-    arr.filter((item, idx)=>idx <= 3
+    arr.filter((item, idx)=>idx <= 6
     ).forEach((item)=>{
-        str += `<div class="movie-card">\n        <div class="movie-image"></div>\n        <h4 class="movie-title">${item.title || item.name}</h4>\n        <h6>Sep 12, 2013</h6>\n        <div class="movie-rating">83%</div>\n      </div>`;
+        str += `<div class="movie-card">\n        <div class="movie-image"></div>\n        <h4 class="movie-title">${item.title || item.name}</h4>\n        <h6>27 aug,2020</h6>\n        <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n      </div>`;
     });
     _base.elements.cardContainer.innerHTML = str;
 }
-let link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
-function swapPage(e) {
-    let textContent = e.target.textContent.trim();
-    if (textContent === "On TV") {
-        link = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
-        console.log("HELLO1");
-    } else if (textContent === "For Rent") link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
-    else if (textContent === "In Theaters") link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
-    else if (textContent === "Streaming") link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
-    return link;
+function renderTrending(arr) {
+    let month = [
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+    ];
+    let str = "";
+    arr.filter((item, idx)=>idx <= 6
+    ).forEach((item)=>{
+        str += `<div class="movie-card">\n            <div class="movie-image"></div>\n            <h4 class="movie-title">${item.title || item.name}</h4>\n            <h6>${month[Number(item.release_date.substring(5, 7)) - 1]}, ${item.release_date.substring(0, 4)}</h6>\n            <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n            </div>`;
+    });
+    _base.elements.trendingCardContainer.innerHTML = str;
+}
+function renderLatest(arr, x) {
+    let str = "";
+    arr.filter((item, idx)=>idx >= 4 && idx <= 7
+    ).forEach((item)=>{
+        str += `<div class="movie-card">\n      <div class="movie-image"></div>\n      <h4 class="movie-title">${item.title}</h4>\n      <h6>${item.original_title}</h6>\n    </div>`;
+    });
+    _base.elements.latestCardContainer.innerHTML = str;
 }
 function showSpinner() {
     _base.elements.spinner.classList.remove("hide");
@@ -602,7 +680,7 @@ function clearFields() {
     _base.elements.input.value = "";
 }
 
-},{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../config/config":"2qEF7"}],"lrDl3":[function(require,module,exports) {
+},{"./base":"lrDl3","../config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lrDl3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "elements", ()=>elements
@@ -613,7 +691,9 @@ const elements = {
     spinner: document.querySelector(".popular-cards .spinner"),
     form: document.querySelector(".background form"),
     input: document.querySelector(".background form input"),
-    categories: document.querySelector(".popular .categories")
+    categories: document.querySelector(".popular .categories"),
+    latestCardContainer: document.querySelector(".latest-cards"),
+    trendingCardContainer: document.querySelector(".trending-cards")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")
