@@ -491,6 +491,7 @@ _base.elements.form.addEventListener("submit", async (e)=>{
     _view.renderCards(results);
 });
 _base.elements.categories.addEventListener("click", async (e)=>{
+    console.log(e);
     let link = _models.swapPage(e);
     let { results  } = await _models.fetchPopularMovies(link.trim());
     console.log(results);
@@ -512,16 +513,26 @@ parcelHelpers.export(exports, "fetchTrendingData", ()=>fetchTrendingData
 parcelHelpers.export(exports, "swapPage", ()=>swapPage
 );
 var _config = require("./config/config");
+var _base = require("./view/base");
 // For storing and fetching any data
 let link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
 function swapPage(e) {
     let textContent = e.target.textContent.trim();
+    for(let i = 0; i < _base.elements.categories.children.length; i++)if (_base.elements.categories.children[i].classList.contains("active")) _base.elements.categories.children[i].classList.remove("active");
     if (textContent === "On TV") {
         link = `https://api.themoviedb.org/3/tv/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+        e.target.classList.add("active");
         console.log("HELLO1");
-    } else if (textContent === "For Rent") link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
-    else if (textContent === "In Theaters") link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
-    else if (textContent === "Streaming") link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    } else if (textContent === "For Rent") {
+        link = `  https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+        e.target.classList.add("active");
+    } else if (textContent === "In Theaters") {
+        link = `  https://api.themoviedb.org/3/tv/on_the_air?api_key=${_config.API_KEY}&language=en-US&page=1\n    `;
+        e.target.classList.add("active");
+    } else if (textContent === "Streaming") {
+        link = `https://api.themoviedb.org/3/movie/popular?api_key=${_config.API_KEY}&language=en-US&page=1`;
+        e.target.classList.add("active");
+    }
     return link;
 }
 async function fetchPopularMovies(url = link) {
@@ -549,7 +560,7 @@ async function fetchSearchResult(query) {
     return data;
 }
 
-},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2qEF7":[function(require,module,exports) {
+},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./view/base":"lrDl3"}],"2qEF7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
@@ -588,7 +599,23 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"eOwXc":[function(require,module,exports) {
+},{}],"lrDl3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "elements", ()=>elements
+);
+const elements = {
+    cardContainer: document.querySelector(".popular-cards"),
+    eachCard: document.querySelector(".popular-cards .movie-card"),
+    spinner: document.querySelector(".popular-cards .spinner"),
+    form: document.querySelector(".background form"),
+    input: document.querySelector(".background form input"),
+    categories: document.querySelector(".popular .categories"),
+    latestCardContainer: document.querySelector(".latest-cards"),
+    trendingCardContainer: document.querySelector(".trending-cards")
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eOwXc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "renderCards", ()=>renderCards
@@ -608,7 +635,6 @@ parcelHelpers.export(exports, "renderLatest", ()=>renderLatest
 parcelHelpers.export(exports, "renderTrending", ()=>renderTrending
 );
 var _base = require("./base");
-var _config = require("../config/config");
 function renderCards(arr) {
     let month = [
         "Jan",
@@ -680,22 +706,6 @@ function clearFields() {
     _base.elements.input.value = "";
 }
 
-},{"./base":"lrDl3","../config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"lrDl3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "elements", ()=>elements
-);
-const elements = {
-    cardContainer: document.querySelector(".popular-cards"),
-    eachCard: document.querySelector(".popular-cards .movie-card"),
-    spinner: document.querySelector(".popular-cards .spinner"),
-    form: document.querySelector(".background form"),
-    input: document.querySelector(".background form input"),
-    categories: document.querySelector(".popular .categories"),
-    latestCardContainer: document.querySelector(".latest-cards"),
-    trendingCardContainer: document.querySelector(".trending-cards")
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")
+},{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")
 
 //# sourceMappingURL=index.5cb7de60.js.map

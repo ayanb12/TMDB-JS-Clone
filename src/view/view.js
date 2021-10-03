@@ -1,5 +1,4 @@
 import { elements } from "./base";
-import {API_KEY} from "../config/config"
 function renderCards(arr,) {
   let month=["Jan","Feb","March","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
 

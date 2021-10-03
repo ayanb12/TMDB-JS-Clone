@@ -1,22 +1,35 @@
 import { API_KEY } from "./config/config";
-
+import {elements} from "./view/base"
 // For storing and fetching any data
 let link=`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
 
 function swapPage(e){
   let textContent=e.target.textContent.trim();
+  for(let i=0;i<elements.categories.children.length;i++){
+    if(elements.categories.children[i].classList.contains("active")){
+      elements.categories.children[i].classList.remove("active")
+    }
+  }
   if(textContent==="On TV"){
     link=`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1
     `
+    e.target.classList.add("active")
     console.log("HELLO1")
   }else if(textContent==="For Rent"){
     link=`  https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1
     `
+    e.target.classList.add("active")
+
   }else if(textContent==="In Theaters"){
     link=`  https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}&language=en-US&page=1
     `
-  }else if(textContent==="Streaming")
+    e.target.classList.add("active")
+
+  }else if(textContent==="Streaming"){
   link=`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+  e.target.classList.add("active")
+  }
+
   return link
 }
 
