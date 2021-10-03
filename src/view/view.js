@@ -20,7 +20,12 @@ function renderCards(arr) {
     .filter((item, idx) => idx <= 6)
     .forEach((item) => {
       str += `<div class="movie-card">
-        <div class="movie-image"></div>
+        <div class="movie-image">
+        <img src="https://cors-anywhere.herokuapp.com/https://image.tmdb.org/t/p/w154/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg
+
+        " alt="">
+
+        </div>
         <h4 class="movie-title">${item.title || item.name}</h4>
         <h6>27 aug,2020</h6>
         <div class="movie-rating">${parseInt(

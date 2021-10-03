@@ -1,4 +1,5 @@
 // Controller
+console.log("hello")
 import {
   fetchPopularMovies,
   fetchSearchResult,
