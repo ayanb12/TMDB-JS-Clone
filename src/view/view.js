@@ -21,9 +21,7 @@ function renderCards(arr) {
     .forEach((item) => {
       str += `<div class="movie-card">
         <div class="movie-image">
-        <img src="https://cors-anywhere.herokuapp.com/https://image.tmdb.org/t/p/w154/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg
-
-        " alt="">
+        <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="">
 
         </div>
         <h4 class="movie-title">${item.title || item.name}</h4>
@@ -56,7 +54,8 @@ function renderTrending(arr) {
     .filter((item, idx) => idx <= 6)
     .forEach((item) => {
       str += `<div class="movie-card">
-            <div class="movie-image"></div>
+            <div class="movie-image">
+            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt=""></div>
             <h4 class="movie-title">${item.title || item.name}</h4>
             <h6>${
               month[Number(item.release_date.substring(5, 7)) - 1]
@@ -75,7 +74,8 @@ function renderLatest(arr, x) {
     .filter((item, idx) => idx >= 4 && idx <= 7)
     .forEach((item) => {
       str += `<div class="movie-card">
-      <div class="movie-image"></div>
+      <div class="movie-image">
+      </div>
       <h4 class="movie-title">${item.title || item.name}</h4>
       <h6>${item.first_air_date || item.release_date || ""} </h6>
     </div>`;
@@ -127,8 +127,11 @@ function renderFreeToWatchCards(arr){
       .forEach((item) => {
         date=item.release_date||(item.first_air_date);
         console.log(date);
+        console.log(item.backdrop_paths)
         str += `<div class="movie-card">
-              <div class="movie-image"></div>
+              <div class="movie-image">
+              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="">
+              </div>
               <h4 class="movie-title">${item.title || item.name}</h4>
               <h6>
               ${date.substring(8,10)}

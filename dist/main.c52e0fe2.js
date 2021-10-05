@@ -189,7 +189,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\images\\blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg":[["blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.9175184f.svg","images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"],"images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"],"./..\\images\\6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg":[["6LfVuZBiOOCtqch5Ukspjb9y0EB.924938b2.jpg","images/6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg"],"images/6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg"],"./..\\images\\loader2.gif":[["loader2.1d1c4813.gif","images/loader2.gif"],"images/loader2.gif"],"./..\\images\\bGZn5RVzMMXju4ev7xbl1aLdXqq.jpg":[["bGZn5RVzMMXju4ev7xbl1aLdXqq.0ab162e9.jpg","images/bGZn5RVzMMXju4ev7xbl1aLdXqq.jpg"],"images/bGZn5RVzMMXju4ev7xbl1aLdXqq.jpg"],"./..\\images\\latest-background.jpg":[["latest-background.e3551842.jpg","images/latest-background.jpg"],"images/latest-background.jpg"],"./..\\images\\photo1.jpg":[["photo1.a99eee60.jpg","images/photo1.jpg"],"images/photo1.jpg"],"./..\\images\\freetowatchlogo.jpg":[["freetowatchlogo.f06f43a0.jpg","images/freetowatchlogo.jpg"],"images/freetowatchlogo.jpg"],"./..\\images\\backgroundTrending.svg":[["backgroundTrending.b73223c7.svg","images/backgroundTrending.svg"],"images/backgroundTrending.svg"],"./..\\images\\footerlogo.svg":[["footerlogo.868b50a8.svg","images/footerlogo.svg"],"images/footerlogo.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./../images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg":[["blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.9175184f.svg","images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"],"images/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"],"./../images/6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg":[["6LfVuZBiOOCtqch5Ukspjb9y0EB.924938b2.jpg","images/6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg"],"images/6LfVuZBiOOCtqch5Ukspjb9y0EB.jpg"],"./../images/loader2.gif":[["loader2.1d1c4813.gif","images/loader2.gif"],"images/loader2.gif"],"./../images/latest-background.jpg":[["latest-background.e3551842.jpg","images/latest-background.jpg"],"images/latest-background.jpg"],"./../images/photo1.jpg":[["photo1.a99eee60.jpg","images/photo1.jpg"],"images/photo1.jpg"],"./../images/backgroundTrending.svg":[["backgroundTrending.b73223c7.svg","images/backgroundTrending.svg"],"images/backgroundTrending.svg"],"./../images/footerlogo.svg":[["footerlogo.868b50a8.svg","images/footerlogo.svg"],"images/footerlogo.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51147" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
