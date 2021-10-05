@@ -9,4 +9,7 @@ export const elements = {
   trendingCardContainer: document.querySelector(".trending-cards"),
   trendingCategories: document.querySelector(".trending .categories"),
   latestCategories: document.querySelector(".latest .categories"),
+  freetowatchCards: document.querySelector(".freetowatch-cards"),
+  freeToWatchCategories: document.querySelector(".freetowatch .categories")
+
 };

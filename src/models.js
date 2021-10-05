@@ -8,7 +8,7 @@ async function fetchPopularMovies(url = link) {
   console.log(data);
   return data;
 }
-let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=a8edf7b45e1c6692b59785f6dab10624&language=en-US&page=1`;
+let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
 async function fetchLatestData(url = linkLatest) {
   let result = await fetch(`${url}`);
   let data = await result.json();
@@ -19,7 +19,14 @@ async function fetchTrendingData(url = linktrending) {
   let data = await result.json();
   return data;
 }
+let linkTop= `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+async function fetchTopRated(url= linkTop)
+{
+  let result = await fetch(`${url}`);
+  let data = await result.json();
+  return data;
 
+}
 fetchLatestData();
 async function fetchSearchResult(query) {
   let result = await fetch(
@@ -83,6 +90,25 @@ function swapTrending(e) {
 
 //swap trending ends
 
+//swapfree to watch starts
+ function swapFreeToWatch(e){
+  for (let i = 0; i < elements.freeToWatchCategories.children.length; i++) {
+    if (elements.freeToWatchCategories.children[i].classList.contains("active")) {
+      elements.freeToWatchCategories.children[i].classList.remove("active");
+  
+ }
+  }
+  let text = e.target.textContent.trim();
+
+  if (text === "Movies") {
+     linkTop= `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  } else if (text === "TV") {
+     linkTop=`https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  }
+  return linkTop;
+}
 function swapLatest(e) {
   let textContent = e.target.textContent.trim();
   for (let i = 0; i < elements.latestCategories.children.length; i++) {
@@ -116,7 +142,10 @@ export {
   fetchSearchResult,
   fetchLatestData,
   fetchTrendingData,
+  fetchTopRated,
   swapPage,
   swapTrending,
   swapLatest,
+  swapFreeToWatch
+
 };

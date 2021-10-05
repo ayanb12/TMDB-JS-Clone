@@ -124,7 +124,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.API_KEY = void 0;
-const API_KEY = "a8edf7b45e1c6692b59785f6dab10624";
+const API_KEY = "14b94f1df0d955d88d29bec2658974a1";
 exports.API_KEY = API_KEY;
 },{}],"view/base.js":[function(require,module,exports) {
 "use strict";
@@ -143,7 +143,9 @@ const elements = {
   latestCardContainer: document.querySelector(".latest-cards"),
   trendingCardContainer: document.querySelector(".trending-cards"),
   trendingCategories: document.querySelector(".trending .categories"),
-  latestCategories: document.querySelector(".latest .categories")
+  latestCategories: document.querySelector(".latest .categories"),
+  freetowatchCards: document.querySelector(".freetowatch-cards"),
+  freeToWatchCategories: document.querySelector(".freetowatch .categories")
 };
 exports.elements = elements;
 },{}],"models.js":[function(require,module,exports) {
@@ -156,9 +158,11 @@ exports.fetchPopularMovies = fetchPopularMovies;
 exports.fetchSearchResult = fetchSearchResult;
 exports.fetchLatestData = fetchLatestData;
 exports.fetchTrendingData = fetchTrendingData;
+exports.fetchTopRated = fetchTopRated;
 exports.swapPage = swapPage;
 exports.swapTrending = swapTrending;
 exports.swapLatest = swapLatest;
+exports.swapFreeToWatch = swapFreeToWatch;
 
 var _config = require("./config/config");
 
@@ -174,7 +178,7 @@ async function fetchPopularMovies(url = link) {
   return data;
 }
 
-let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=a8edf7b45e1c6692b59785f6dab10624&language=en-US&page=1`;
+let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${_config.API_KEY}&language=en-US&page=1`;
 
 async function fetchLatestData(url = linkLatest) {
   let result = await fetch(`${url}`);
@@ -183,6 +187,14 @@ async function fetchLatestData(url = linkLatest) {
 }
 
 async function fetchTrendingData(url = linktrending) {
+  let result = await fetch(`${url}`);
+  let data = await result.json();
+  return data;
+}
+
+let linkTop = `https://api.themoviedb.org/3/movie/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+
+async function fetchTopRated(url = linkTop) {
   let result = await fetch(`${url}`);
   let data = await result.json();
   return data;
@@ -249,7 +261,28 @@ function swapTrending(e) {
 
   return linktrending;
 } //swap trending ends
+//swapfree to watch starts
 
+
+function swapFreeToWatch(e) {
+  for (let i = 0; i < _base.elements.freeToWatchCategories.children.length; i++) {
+    if (_base.elements.freeToWatchCategories.children[i].classList.contains("active")) {
+      _base.elements.freeToWatchCategories.children[i].classList.remove("active");
+    }
+  }
+
+  let text = e.target.textContent.trim();
+
+  if (text === "Movies") {
+    linkTop = `https://api.themoviedb.org/3/movie/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  } else if (text === "TV") {
+    linkTop = `https://api.themoviedb.org/3/tv/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+    e.target.classList.add("active");
+  }
+
+  return linkTop;
+}
 
 function swapLatest(e) {
   let textContent = e.target.textContent.trim();
@@ -294,6 +327,7 @@ exports.submitValue = submitValue;
 exports.clearFields = clearFields;
 exports.renderLatest = renderLatest;
 exports.renderTrending = renderTrending;
+exports.renderFreeToWatchCards = renderFreeToWatchCards;
 
 var _base = require("./base");
 
@@ -302,7 +336,12 @@ function renderCards(arr) {
   let str = "";
   arr.filter((item, idx) => idx <= 6).forEach(item => {
     str += `<div class="movie-card">
-        <div class="movie-image"></div>
+        <div class="movie-image">
+        <img src="https://cors-anywhere.herokuapp.com/https://image.tmdb.org/t/p/w154/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg
+
+        " alt="">
+
+        </div>
         <h4 class="movie-title">${item.title || item.name}</h4>
         <h6>27 aug,2020</h6>
         <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>
@@ -360,6 +399,25 @@ function clearFields() {
   value = "";
   _base.elements.input.value = "";
 }
+
+function renderFreeToWatchCards(arr) {
+  let month = ["Jan", "Feb", "March", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  let str = "";
+  let date = "";
+  arr.filter((item, idx) => idx <= 6).forEach(item => {
+    date = item.release_date || item.first_air_date;
+    console.log(date);
+    str += `<div class="movie-card">
+              <div class="movie-image"></div>
+              <h4 class="movie-title">${item.title || item.name}</h4>
+              <h6>
+              ${date.substring(8, 10)}
+              ${month[Number(date.substring(5, 7)) - 1]}, ${date.substring(0, 4)}</h6>
+              <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>
+              </div>`;
+  });
+  _base.elements.freetowatchCards.innerHTML = str;
+}
 },{"./base":"view/base.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -370,6 +428,8 @@ var _view = require("./view/view");
 var _base = require("./view/base");
 
 // Controller
+console.log("hello");
+
 async function loadPopularData() {
   (0, _view.showSpinner)();
   let {
@@ -401,6 +461,17 @@ async function loadtrendingData() {
   (0, _view.renderTrending)(results);
 }
 
+async function loadFreeToWatchData() {
+  (0, _view.showSpinner)();
+  let {
+    results
+  } = await (0, _models.fetchTopRated)();
+  console.log(results);
+  (0, _view.clearSpinner)();
+  (0, _view.renderFreeToWatchCards)(results);
+}
+
+loadFreeToWatchData();
 loadtrendingData();
 loadlatestData();
 
@@ -444,6 +515,15 @@ _base.elements.latestCategories.addEventListener("click", async e => {
   console.log(results);
   (0, _view.renderLatest)(results);
 });
+
+_base.elements.freeToWatchCategories.addEventListener("click", async e => {
+  let link = (0, _models.swapFreeToWatch)(e);
+  let {
+    results
+  } = await (0, _models.fetchTopRated)(link.trim());
+  console.log(results);
+  (0, _view.renderFreeToWatchCards)(results);
+});
 },{"./models":"models.js","./view/view":"view/view.js","./view/base":"view/base.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -472,7 +552,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64017" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51147" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

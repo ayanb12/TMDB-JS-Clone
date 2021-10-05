@@ -186,7 +186,7 @@ nav .icons-ul li i {
   position: relative;
 }
 .popular .movie-image {
-  background: url("/bGZn5RVzMMXju4ev7xbl1aLdXqq.0ab162e9.jpg") no-repeat center
+   background: url("/bGZn5RVzMMXju4ev7xbl1aLdXqq.0ab162e9.jpg") no-repeat center 
     center/cover;
 
   height: 300px;
