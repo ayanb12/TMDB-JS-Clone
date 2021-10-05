@@ -104,6 +104,47 @@ function clearFields() {
   value = "";
   elements.input.value = "";
 }
+function renderFreeToWatchCards(arr){
+    let month = [
+      "Jan",
+      "Feb",
+      "March",
+      "Apr",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+  
+    let str = "";
+    let date="";
+    arr
+      .filter((item, idx) => idx <= 6)
+      .forEach((item) => {
+        date=item.release_date||(item.first_air_date);
+        console.log(date);
+        str += `<div class="movie-card">
+              <div class="movie-image"></div>
+              <h4 class="movie-title">${item.title || item.name}</h4>
+              <h6>
+              ${date.substring(8,10)}
+              ${
+               
+                month[Number(date.substring(5, 7)) - 1]
+              }, ${
+               
+                date.substring(0, 4)}</h6>
+              <div class="movie-rating">${parseInt(
+                Number(item.vote_average / 10) * 100
+              )}</div>
+              </div>`;
+      });
+    elements.freetowatchCards.innerHTML = str;
+  }
 
 export {
   renderCards,
@@ -114,4 +155,5 @@ export {
   clearFields,
   renderLatest,
   renderTrending,
+  renderFreeToWatchCards,
 };

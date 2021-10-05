@@ -8,6 +8,8 @@ import {
   swapPage,
   swapTrending,
   swapLatest,
+  swapFreeToWatch,
+  fetchTopRated,
 } from "./models";
 import {
   renderCards,
@@ -18,6 +20,7 @@ import {
   clearFields,
   renderLatest,
   renderTrending,
+  renderFreeToWatchCards,
 } from "./view/view";
 import { elements } from "./view/base";
 
@@ -43,6 +46,14 @@ async function loadtrendingData() {
   clearSpinner();
   renderTrending(results);
 }
+async function loadFreeToWatchData() {
+  showSpinner();
+  let { results } = await fetchTopRated();
+  console.log(results);
+  clearSpinner();
+  renderFreeToWatchCards(results);
+}
+loadFreeToWatchData();
 loadtrendingData();
 loadlatestData();
 elements.input.addEventListener("change", takeInput);
@@ -74,4 +85,11 @@ elements.latestCategories.addEventListener("click", async (e) => {
   let { results } = await fetchLatestData(link.trim());
   console.log(results);
   renderLatest(results);
+});
+
+elements.freeToWatchCategories.addEventListener("click",async(e)=>{
+  let link = swapFreeToWatch(e);
+  let { results } = await fetchTopRated(link.trim());
+  console.log(results);
+  renderFreeToWatchCards(results);
 });
