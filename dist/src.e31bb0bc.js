@@ -124,7 +124,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.API_KEY = void 0;
-const API_KEY = "14b94f1df0d955d88d29bec2658974a1";
+const API_KEY = "e0c487d1bc7b935539db0b8a0bab274a";
 exports.API_KEY = API_KEY;
 },{}],"view/base.js":[function(require,module,exports) {
 "use strict";
@@ -337,9 +337,7 @@ function renderCards(arr) {
   arr.filter((item, idx) => idx <= 6).forEach(item => {
     str += `<div class="movie-card">
         <div class="movie-image">
-        <img src="https://cors-anywhere.herokuapp.com/https://image.tmdb.org/t/p/w154/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg
-
-        " alt="">
+        <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="">
 
         </div>
         <h4 class="movie-title">${item.title || item.name}</h4>
@@ -355,7 +353,8 @@ function renderTrending(arr) {
   let str = "";
   arr.filter((item, idx) => idx <= 6).forEach(item => {
     str += `<div class="movie-card">
-            <div class="movie-image"></div>
+            <div class="movie-image">
+            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt=""></div>
             <h4 class="movie-title">${item.title || item.name}</h4>
             <h6>${month[Number(item.release_date.substring(5, 7)) - 1]}, ${item.release_date.substring(0, 4)}</h6>
             <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>
@@ -368,7 +367,8 @@ function renderLatest(arr, x) {
   let str = "";
   arr.filter((item, idx) => idx >= 4 && idx <= 7).forEach(item => {
     str += `<div class="movie-card">
-      <div class="movie-image"></div>
+      <div class="movie-image">
+      </div>
       <h4 class="movie-title">${item.title || item.name}</h4>
       <h6>${item.first_air_date || item.release_date || ""} </h6>
     </div>`;
@@ -407,8 +407,11 @@ function renderFreeToWatchCards(arr) {
   arr.filter((item, idx) => idx <= 6).forEach(item => {
     date = item.release_date || item.first_air_date;
     console.log(date);
+    console.log(item.backdrop_paths);
     str += `<div class="movie-card">
-              <div class="movie-image"></div>
+              <div class="movie-image">
+              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="">
+              </div>
               <h4 class="movie-title">${item.title || item.name}</h4>
               <h6>
               ${date.substring(8, 10)}
@@ -552,7 +555,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51147" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42175" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
