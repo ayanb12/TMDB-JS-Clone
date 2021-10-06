@@ -10,6 +10,9 @@ export const elements = {
   trendingCategories: document.querySelector(".trending .categories"),
   latestCategories: document.querySelector(".latest .categories"),
   freetowatchCards: document.querySelector(".freetowatch-cards"),
-  freeToWatchCategories: document.querySelector(".freetowatch .categories")
-
+  freeToWatchCategories: document.querySelector(".freetowatch .categories"),
+  page1: document.querySelector(".page-1"),
+  search:document.querySelector(".search"),
+  faarrowleft:document.querySelector(".fa-arrow-left"),
+  movieinfo:document.querySelector(".search .box")
 };

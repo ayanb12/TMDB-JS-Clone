@@ -21,6 +21,9 @@ import {
   renderLatest,
   renderTrending,
   renderFreeToWatchCards,
+  changepage,
+  backtomain,
+  renderSearch
 } from "./view/view";
 import { elements } from "./view/base";
 
@@ -58,12 +61,16 @@ loadtrendingData();
 loadlatestData();
 elements.input.addEventListener("change", takeInput);
 
-let searchresult = "";
+// console.log(elements.page1.classList.add("hide"))
+
 elements.form.addEventListener("submit", async (e) => {
-  searchresult = submitValue(e);
-  clearFields();
-  let { results } = await fetchSearchResult(searchresult.trim());
-  renderCards(results);
+  e.preventDefault();
+  changepage(e)
+  let {results}=await fetchSearchResult(  submitValue(e)
+  );
+  renderSearch(results)
+  console.log(results)
+  
 });
 
 elements.categories.addEventListener("click", async (e) => {
@@ -93,3 +100,4 @@ elements.freeToWatchCategories.addEventListener("click",async(e)=>{
   console.log(results);
   renderFreeToWatchCards(results);
 });
+elements.faarrowleft.addEventListener("click",backtomain)

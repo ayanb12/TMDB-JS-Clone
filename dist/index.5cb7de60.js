@@ -492,12 +492,13 @@ loadFreeToWatchData();
 loadtrendingData();
 loadlatestData();
 _base.elements.input.addEventListener("change", _view.takeInput);
-let searchresult = "";
+// console.log(elements.page1.classList.add("hide"))
 _base.elements.form.addEventListener("submit", async (e)=>{
-    searchresult = _view.submitValue(e);
-    _view.clearFields();
-    let { results  } = await _models.fetchSearchResult(searchresult.trim());
-    _view.renderCards(results);
+    e.preventDefault();
+    _view.changepage(e);
+    let { results  } = await _models.fetchSearchResult(_view.submitValue(e));
+    _view.renderSearch(results);
+    console.log(results);
 });
 _base.elements.categories.addEventListener("click", async (e)=>{
     console.log(e);
@@ -524,6 +525,7 @@ _base.elements.freeToWatchCategories.addEventListener("click", async (e)=>{
     console.log(results);
     _view.renderFreeToWatchCards(results);
 });
+_base.elements.faarrowleft.addEventListener("click", _view.backtomain);
 
 },{"./models":"ihxjA","./view/view":"eOwXc","./view/base":"lrDl3"}],"ihxjA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -575,7 +577,7 @@ async function fetchTopRated(url = linkTop) {
 }
 fetchLatestData();
 async function fetchSearchResult(query) {
-    let result = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
+    let result = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${_config.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`);
     let data = await result.json();
     return data;
 }
@@ -703,7 +705,11 @@ const elements = {
     trendingCategories: document.querySelector(".trending .categories"),
     latestCategories: document.querySelector(".latest .categories"),
     freetowatchCards: document.querySelector(".freetowatch-cards"),
-    freeToWatchCategories: document.querySelector(".freetowatch .categories")
+    freeToWatchCategories: document.querySelector(".freetowatch .categories"),
+    page1: document.querySelector(".page-1"),
+    search: document.querySelector(".search"),
+    faarrowleft: document.querySelector(".fa-arrow-left"),
+    movieinfo: document.querySelector(".search .box")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eOwXc":[function(require,module,exports) {
@@ -726,6 +732,12 @@ parcelHelpers.export(exports, "renderLatest", ()=>renderLatest
 parcelHelpers.export(exports, "renderTrending", ()=>renderTrending
 );
 parcelHelpers.export(exports, "renderFreeToWatchCards", ()=>renderFreeToWatchCards
+);
+parcelHelpers.export(exports, "changepage", ()=>changepage
+);
+parcelHelpers.export(exports, "backtomain", ()=>backtomain
+);
+parcelHelpers.export(exports, "renderSearch", ()=>renderSearch
 );
 var _base = require("./base");
 function renderCards(arr) {
@@ -772,6 +784,11 @@ function renderTrending(arr) {
     });
     _base.elements.trendingCardContainer.innerHTML = str;
 }
+function changepage(e) {
+    e.preventDefault();
+    _base.elements.page1.classList.add("hide");
+    _base.elements.search.classList.remove("hide");
+}
 function renderLatest(arr, x) {
     let str = "";
     arr.filter((item, idx)=>idx >= 4 && idx <= 7
@@ -794,6 +811,28 @@ function takeInput(e) {
 function submitValue(e) {
     e.preventDefault();
     return value;
+}
+function renderSearch(arr) {
+    let month = [
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec", 
+    ];
+    let str = "";
+    arr.filter((item, idx)=>idx <= 6
+    ).forEach((item)=>{
+        str += `            <div class="movie-info">\n      <div class="movie-image">\n      <img src="https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}" alt="" crossorigin="anonymous">\n  </div>\n  <div class="movie-details">\n      <h3>${item.original_name || item.original_title}</h3>\n      <h3>${item.first_air_date || item.release_date || ""}</h3>\n      <p>${item.overview}</p>\n  </div>\n  </div>`;
+    });
+    _base.elements.movieinfo.innerHTML = str;
 }
 function clearFields() {
     value = "";
@@ -824,6 +863,10 @@ function renderFreeToWatchCards(arr) {
         str += `<div class="movie-card">\n              <div class="movie-image">\n              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path} "  alt="" crossorigin="anonymous">\n              </div>\n              <h4 class="movie-title">${item.title || item.name}</h4>\n              <h6>\n              ${date.substring(8, 10)}\n              ${month[Number(date.substring(5, 7)) - 1]}, ${date.substring(0, 4)}</h6>\n              <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n              </div>`;
     });
     _base.elements.freetowatchCards.innerHTML = str;
+}
+function backtomain(e) {
+    _base.elements.page1.classList.remove("hide");
+    _base.elements.search.classList.add("hide");
 }
 
 },{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")

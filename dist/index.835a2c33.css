@@ -538,7 +538,7 @@ border-radius: 10px;
 .search{
   display: flex;
   width: 100vw;
-  height: 200vh
+  /* height: 200vh */
 }
 
 .search .left,.search .right{
@@ -575,11 +575,10 @@ margin-bottom: 10px;
   width: 65%;
 }
 
-.search .right .movie-info{
+.search .right .box .movie-info{
 display: flex;
 border: 1px solid #00000014;
 border-radius: 10px;
-
 z-index: 1;
 }
 
@@ -597,5 +596,9 @@ z-index: 1;
 
 .hide{
   display: none;
+}
+
+.fa-arrow-left:hover{
+cursor: pointer;
 }
 /*# sourceMappingURL=index.835a2c33.css.map */
