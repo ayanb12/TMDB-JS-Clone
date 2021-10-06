@@ -69,6 +69,11 @@ function renderTrending(arr) {
     });
   elements.trendingCardContainer.innerHTML = str;
 }
+function changepage(e){
+  e.preventDefault()
+  elements.page1.classList.add("hide")
+  elements.search.classList.remove("hide")
+}
 
 function renderLatest(arr, x) {
   let str = "";
@@ -106,7 +111,39 @@ function submitValue(e) {
   e.preventDefault();
   return value;
 }
+function renderSearch(arr){
+  let month = [
+    "Jan",
+    "Feb",
+    "March",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
+  let str = "";
+  arr
+    .filter((item, idx) => idx <= 6)
+    .forEach((item) => {
+      str +=`            <div class="movie-info">
+      <div class="movie-image">
+      <img src="https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path }" alt="" crossorigin="anonymous">
+  </div>
+  <div class="movie-details">
+      <h3>${item.original_name || item.original_title}</h3>
+      <h3>${item.first_air_date || item.release_date || ""}</h3>
+      <p>${item.overview}</p>
+  </div>
+  </div>`
+});
+elements.movieinfo.innerHTML=str;
+}
 function clearFields() {
   value = "";
   elements.input.value = "";
@@ -155,6 +192,11 @@ function renderFreeToWatchCards(arr){
       });
     elements.freetowatchCards.innerHTML = str;
   }
+  function backtomain(e){
+    elements.page1.classList.remove("hide")
+    elements.search.classList.add("hide")
+  
+  }
 
 export {
   renderCards,
@@ -166,4 +208,7 @@ export {
   renderLatest,
   renderTrending,
   renderFreeToWatchCards,
+  changepage,
+  backtomain,
+  renderSearch,
 };
