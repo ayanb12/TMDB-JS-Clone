@@ -481,6 +481,14 @@ async function loadtrendingData() {
     _view.clearSpinner();
     _view.renderTrending(results);
 }
+async function loadFreeToWatchData() {
+    _view.showSpinner();
+    let { results  } = await _models.fetchTopRated();
+    console.log(results);
+    _view.clearSpinner();
+    _view.renderFreeToWatchCards(results);
+}
+loadFreeToWatchData();
 loadtrendingData();
 loadlatestData();
 _base.elements.input.addEventListener("change", _view.takeInput);
@@ -510,6 +518,12 @@ _base.elements.latestCategories.addEventListener("click", async (e)=>{
     console.log(results);
     _view.renderLatest(results);
 });
+_base.elements.freeToWatchCategories.addEventListener("click", async (e)=>{
+    let link = _models.swapFreeToWatch(e);
+    let { results  } = await _models.fetchTopRated(link.trim());
+    console.log(results);
+    _view.renderFreeToWatchCards(results);
+});
 
 },{"./models":"ihxjA","./view/view":"eOwXc","./view/base":"lrDl3"}],"ihxjA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -522,11 +536,15 @@ parcelHelpers.export(exports, "fetchLatestData", ()=>fetchLatestData
 );
 parcelHelpers.export(exports, "fetchTrendingData", ()=>fetchTrendingData
 );
+parcelHelpers.export(exports, "fetchTopRated", ()=>fetchTopRated
+);
 parcelHelpers.export(exports, "swapPage", ()=>swapPage
 );
 parcelHelpers.export(exports, "swapTrending", ()=>swapTrending
 );
 parcelHelpers.export(exports, "swapLatest", ()=>swapLatest
+);
+parcelHelpers.export(exports, "swapFreeToWatch", ()=>swapFreeToWatch
 );
 var _config = require("./config/config");
 var _base = require("./view/base");
@@ -538,13 +556,19 @@ async function fetchPopularMovies(url = link) {
     console.log(data);
     return data;
 }
-let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=a8edf7b45e1c6692b59785f6dab10624&language=en-US&page=1`;
+let linkLatest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${_config.API_KEY}&language=en-US&page=1`;
 async function fetchLatestData(url = linkLatest) {
     let result = await fetch(`${url}`);
     let data = await result.json();
     return data;
 }
 async function fetchTrendingData(url = linktrending) {
+    let result = await fetch(`${url}`);
+    let data = await result.json();
+    return data;
+}
+let linkTop = `https://api.themoviedb.org/3/movie/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+async function fetchTopRated(url = linkTop) {
     let result = await fetch(`${url}`);
     let data = await result.json();
     return data;
@@ -590,6 +614,19 @@ function swapTrending(e) {
     return linktrending;
 }
 //swap trending ends
+//swapfree to watch starts
+function swapFreeToWatch(e) {
+    for(let i = 0; i < _base.elements.freeToWatchCategories.children.length; i++)if (_base.elements.freeToWatchCategories.children[i].classList.contains("active")) _base.elements.freeToWatchCategories.children[i].classList.remove("active");
+    let text = e.target.textContent.trim();
+    if (text === "Movies") {
+        linkTop = `https://api.themoviedb.org/3/movie/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+        e.target.classList.add("active");
+    } else if (text === "TV") {
+        linkTop = `https://api.themoviedb.org/3/tv/top_rated?api_key=${_config.API_KEY}&language=en-US&page=1`;
+        e.target.classList.add("active");
+    }
+    return linkTop;
+}
 function swapLatest(e) {
     let textContent = e.target.textContent.trim();
     for(let i = 0; i < _base.elements.latestCategories.children.length; i++)if (_base.elements.latestCategories.children[i].classList.contains("active")) _base.elements.latestCategories.children[i].classList.remove("active");
@@ -610,7 +647,7 @@ function swapLatest(e) {
     return linkLatest;
 }
 
-},{"./config/config":"2qEF7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./view/base":"lrDl3"}],"2qEF7":[function(require,module,exports) {
+},{"./config/config":"2qEF7","./view/base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"2qEF7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_KEY", ()=>API_KEY
@@ -664,7 +701,9 @@ const elements = {
     latestCardContainer: document.querySelector(".latest-cards"),
     trendingCardContainer: document.querySelector(".trending-cards"),
     trendingCategories: document.querySelector(".trending .categories"),
-    latestCategories: document.querySelector(".latest .categories")
+    latestCategories: document.querySelector(".latest .categories"),
+    freetowatchCards: document.querySelector(".freetowatch-cards"),
+    freeToWatchCategories: document.querySelector(".freetowatch .categories")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eOwXc":[function(require,module,exports) {
@@ -686,6 +725,8 @@ parcelHelpers.export(exports, "renderLatest", ()=>renderLatest
 );
 parcelHelpers.export(exports, "renderTrending", ()=>renderTrending
 );
+parcelHelpers.export(exports, "renderFreeToWatchCards", ()=>renderFreeToWatchCards
+);
 var _base = require("./base");
 function renderCards(arr) {
     let month = [
@@ -705,7 +746,7 @@ function renderCards(arr) {
     let str = "";
     arr.filter((item, idx)=>idx <= 6
     ).forEach((item)=>{
-        str += `<div class="movie-card">\n        <div class="movie-image">\n        <img src="https://cors-anywhere.herokuapp.com/https://image.tmdb.org/t/p/w154/xmbU4JTUm8rsdtn7Y3Fcm30GpeT.jpg\n\n        " alt="">\n\n        </div>\n        <h4 class="movie-title">${item.title || item.name}</h4>\n        <h6>27 aug,2020</h6>\n        <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n      </div>`;
+        str += `<div class="movie-card">\n        <div class="movie-image">\n        <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="" crossorigin="anonymous">\n\n        </div>\n        <h4 class="movie-title">${item.title || item.name}</h4>\n        <h6>27 aug,2020</h6>\n        <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n      </div>`;
     });
     _base.elements.cardContainer.innerHTML = str;
 }
@@ -727,7 +768,7 @@ function renderTrending(arr) {
     let str = "";
     arr.filter((item, idx)=>idx <= 6
     ).forEach((item)=>{
-        str += `<div class="movie-card">\n            <div class="movie-image"></div>\n            <h4 class="movie-title">${item.title || item.name}</h4>\n            <h6>${month[Number(item.release_date.substring(5, 7)) - 1]}, ${item.release_date.substring(0, 4)}</h6>\n            <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n            </div>`;
+        str += `<div class="movie-card">\n            <div class="movie-image">\n            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}" alt="" crossorigin="anonymous">\n            \n            </div>\n            <h4 class="movie-title">${item.title || item.name}</h4>\n            <h6>${month[Number(item.release_date.substring(5, 7)) - 1]}, ${item.release_date.substring(0, 4)}</h6>\n            <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n            </div>`;
     });
     _base.elements.trendingCardContainer.innerHTML = str;
 }
@@ -735,7 +776,8 @@ function renderLatest(arr, x) {
     let str = "";
     arr.filter((item, idx)=>idx >= 4 && idx <= 7
     ).forEach((item)=>{
-        str += `<div class="movie-card">\n      <div class="movie-image"></div>\n      <h4 class="movie-title">${item.title || item.name}</h4>\n      <h6>${item.first_air_date || item.release_date || ""} </h6>\n    </div>`;
+        console.log(item.poster_path);
+        str += `<div class="movie-card">\n      <div class="movie-image">\n      \n      <img src="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces${item.poster_path}" alt="" crossorigin="anonymous">\n\n      </div>\n      <h4 class="movie-title">${item.title || item.name}</h4>\n      <h6>${item.first_air_date || item.release_date || ""} </h6>\n    </div>`;
     });
     _base.elements.latestCardContainer.innerHTML = str;
 }
@@ -756,6 +798,32 @@ function submitValue(e) {
 function clearFields() {
     value = "";
     _base.elements.input.value = "";
+}
+function renderFreeToWatchCards(arr) {
+    let month = [
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec", 
+    ];
+    let str = "";
+    let date = "";
+    arr.filter((item, idx)=>idx <= 6
+    ).forEach((item)=>{
+        date = item.release_date || item.first_air_date;
+        console.log(date);
+        console.log(item.backdrop_paths);
+        str += `<div class="movie-card">\n              <div class="movie-image">\n              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path} "  alt="" crossorigin="anonymous">\n              </div>\n              <h4 class="movie-title">${item.title || item.name}</h4>\n              <h6>\n              ${date.substring(8, 10)}\n              ${month[Number(date.substring(5, 7)) - 1]}, ${date.substring(0, 4)}</h6>\n              <div class="movie-rating">${parseInt(Number(item.vote_average / 10) * 100)}</div>\n              </div>`;
+    });
+    _base.elements.freetowatchCards.innerHTML = str;
 }
 
 },{"./base":"lrDl3","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8Ye98","6cF5V"], "6cF5V", "parcelRequire8e5a")
