@@ -491,3 +491,57 @@ border-radius: 10px;
   height: 70px;
   width: 100px;
 }
+/* search-part */
+.search{
+  display: flex;
+  width: 100vw;
+  height: 200vh
+}
+.search .left,.search .right{
+  width:30% ;
+  height: 45%;
+  /* background-color: red; */
+  padding: 3.5rem;
+}
+.search .left ul li {
+  margin-bottom: 10px ;
+  padding: 5px 10px;
+}
+.search .left ul .selected{
+  background-color: #00000014;
+}
+.search .left ul {
+border: 1px solid #00000014;
+/* padding: 5px 50px; */
+border-radius: 10px;
+z-index: 1;
+}
+.search .left ul li:nth-child(1) {
+  background-color:#01B4E4;
+border-radius: 10px 10px 0 0;
+padding: 25px 10px;
+margin-bottom: 10px;
+}
+.search .right{
+  width: 65%;
+}
+.search .right .movie-info{
+display: flex;
+border: 1px solid #00000014;
+border-radius: 10px;
+
+z-index: 1;
+}
+.search .right .movie-info .movie-image img{
+  margin-right: 10px;
+  width: 130px;
+  height: 170px;
+  border-radius: 10px 0  0 10px ;
+}
+.search .right .movie-info .movie-details h3{
+  margin: 10px 0;
+
+}
+.hide{
+  display: none;
+}
