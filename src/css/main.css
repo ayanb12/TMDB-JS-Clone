@@ -247,18 +247,23 @@ nav .icons-ul li i {
 }
 
 .latest .movie-card {
-  margin-right: 1.5rem;
+  /* margin-right: 1.5rem; */
   width: 300px;
   height: 220px;
   text-align: center;
   z-index: 1;
 }
+.latest .movie-card .movie-image img {
+  height: 160px;
+  width: 250px;
+}
+
 .latest .movie-card:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 .latest .movie-image {
-  background: url("../images/photo1.jpg") no-repeat center center/cover;
+  /* background: url("../images/photo1.jpg") no-repeat center center/cover; */
 
   height: 150px;
   border-radius: 10px;
